@@ -10,6 +10,9 @@ const bodyParser = require('body-parser');
 // interact with in our GET endpoint
 const {ShoppingList} = require('./models');
 
+//import recipe model
+const {Recipes} = require('./models');
+
 const jsonParser = bodyParser.json();
 const app = express();
 
@@ -25,11 +28,21 @@ ShoppingList.create('beans', 2);
 ShoppingList.create('tomatoes', 3);
 ShoppingList.create('peppers', 4);
 
+// add recipes
+Recipes.create('Taco Ring', ['Beef', 'Cheese', 'Croissants', 'Spices']);
+Recipes.create('Salad', ['Celery', 'Spinach', 'Croutons', 'Dressing']);
+Recipes.create('Chocolate Milk', ['Cocoa', 'Milk', 'Sugar']);
+
 // when the root of this route is called with GET, return
 // all current ShoppingList items by calling `ShoppingList.get()`
 app.get('/shopping-list', (req, res) => {
   res.json(ShoppingList.get());
 });
+
+//GET Endpoint for 'Recipes' model
+app.get('/recipes-list', (req, res) => {
+  res.json(Recipes.get());
+})
 
 app.listen(process.env.PORT || 8080, () => {
   console.log(`Your app is listening on port ${process.env.PORT || 8080}`);

@@ -65,7 +65,7 @@ const Recipes = {
     return item;
   },
   get: function() {
-    console.log('Retreiving recipes');
+    console.log('Retrieving recipes');
     return Object.keys(this.items).map(key => this.items[key]);
   },
   delete: function(itemId) {
